@@ -17,7 +17,7 @@ class RegistrationForm(FlaskForm):
     qualification = StringField('Qualification', validators=[DataRequired(), Length(min=3, max=10)])
     ppa = StringField('PPA', validators=[DataRequired(), Length(min=2, max=200)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4)]) 
-    confirm_password = PasswordField('Confirm Password', validators==[DataRequired(), Length(min=4), EqualTo('password')])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(min=4), EqualTo('password')])
     submit = SubmitField('Register')
 
 class LoginForm(FlaskForm) :
