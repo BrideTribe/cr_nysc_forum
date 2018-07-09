@@ -4,4 +4,7 @@
 **/__pycache__
 .coverage
 .eslintrc.json
+<<<<<<< HEAD
 **/fonts/
+=======
+>>>>>>> 918b6a402550306475341c51e02160583425cb0d
