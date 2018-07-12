@@ -12,9 +12,15 @@ posts = [
         'content': 'First NYSC Forum post content'
     },
     {
-        'author': 'Opeyemi Susan',
+        'author': 'Opeyemi Emmanuel',
         'title': 'NYSC Forum Post 2',
-        'date_posted': 'June 11, 2018',
+        'date_posted': 'June 30, 2018',
+        'content': 'Second NYSC Forum post content'
+    },
+    {
+        'author': 'Name Susan',
+        'title': 'NYSC Forum Post 3',
+        'date_posted': 'July 12, 2018',
         'content': 'Second NYSC Forum post content'
     }
 ]
