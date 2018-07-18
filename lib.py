@@ -40,13 +40,20 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        flash('Account created for {forms.RegistrationForm.full_name.data} successfully!', 'success')
+        flash('Account created for {RegistrationForm.full_name.data} successfully!', 'success')
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    
+    if form.validate_on_submit():
+        if form.email.data == 'ritymontero@gmail.com' and form.password.data == 'password':
+            flash('Login Successful!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Email or Password incorrect', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 if __name__ == '__main__':
