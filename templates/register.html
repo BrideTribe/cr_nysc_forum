@@ -36,6 +36,21 @@
                     </div>
 
                     <div class="form-group">
+                        {{ form.callup_no.label(class="form-control-label") }}
+
+                        {% if form.callup_no.errors %}
+                            {{ form.callup_no(class="form-control form-control-sm is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.callup_no.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.callup_no(class="form-control form-control-sm")}}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
                         {{ form.gender.label(class="form-control-label") }}
                        
                         {% if form.gender.errors %}
