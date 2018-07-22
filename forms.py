@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 class RegistrationForm(FlaskForm):
     full_name = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=100)])
     state_code = StringField('State Code', validators=[DataRequired(), Length(max=11)])
+    callup_no = StringField('Callup No', validators=[DataRequired(), Length(max=50)])
     gender = StringField('Gender', validators=[DataRequired(), Length(min=4, max=6)])
     marital_status = StringField('Marital Status', validators=[DataRequired(), Length(max=25)])
     phone = StringField('Mobile No', validators=[DataRequired(), Length(max=15)])
@@ -22,6 +23,7 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm) :
     email = StringField('E-Mail', validators=[DataRequired(), Email(), Length(max=200)])
+    state_code = StringField('State Code', validators=[DataRequired(), Length(max=11)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4)])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login') 
