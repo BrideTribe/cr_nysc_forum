@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from nyscforum.models import User
 
 class RegistrationForm(FlaskForm):
     full_name = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=100)])
@@ -20,6 +21,26 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4)]) 
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(min=4), EqualTo('password')])
     submit = SubmitField('Register')
+
+    def validate_fullname(self, full_name):
+        user = User.query.filter_by(full_name=full_name.data).first()
+        if user:
+            raise ValidationError(f'{self.full_name.data} already exist!')
+
+    def validate_state_code(self, state_code):
+        user = User.query.filter_by(state_code=state_code.data).first()
+        if user:
+            raise ValidationError(f'{self.state_code} already exist, try a different state code.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(f'{self.email} already exist, try a different email address.')
+    
+    def validate_phone(self, phone):
+        user = USer.query.filter_by(phone=phone.data).first()
+        if user:
+            raise ValidationError(f'{self.phone.data} already exist, try another phone number.')
 
 class LoginForm(FlaskForm) :
     email = StringField('E-Mail', validators=[DataRequired(), Email(), Length(max=200)])
