@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect
-from nyscforum import app
+from nyscforum import app, db, bcrypt
 from nyscforum.forms import RegistrationForm, LoginForm
 from nyscforum.models import User, Post
 
@@ -39,8 +39,16 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        flash('Account created for {RegistrationForm.full_name.data} successfully!', 'success')
-        return redirect(url_for('home'))
+        h_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(full_name=form.full_name.data, state_code=form.state_code.data, callup_no=form.callup_no.data,
+                    gender=form.gender.data, marital_status=form.marital_status.data, phone=form.phone.data,
+                    email=form.email.data, state_of_origin=form.state_of_origin.data, lga=form.lga.data,
+                    address=form.address.data, institution=form.institution.data, course=form.course.data, 
+                    qualification=form.qualification.data, ppa=form.ppa.data, password=h_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created for {form.full_name.data} successfully!', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
