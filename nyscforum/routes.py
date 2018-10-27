@@ -74,4 +74,5 @@ def login():
 
 @app.route("/logout")
 def logout():
-    
+    login_user()
+    return redirect(url_for('home'))
