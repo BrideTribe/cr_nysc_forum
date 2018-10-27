@@ -1,8 +1,13 @@
 from datetime import datetime
-from nyscforum import db
+from nyscforum import db, login_manager
+from flask_login import UserMixin
 
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     
     __tablename__ = 'users'
 
@@ -27,10 +32,7 @@ class User(db.Model):
     post = db.relationship('Post', backref='author', lazy=True)
 
     def __repr__(self):
-        return "User('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
-                    self.full_name, self.state_code, self.callup_no, self.gender, self.marital_status,
-                    self.phone, self.email, self.state_of_origin, self.lga, self.address, self.institution, self.course, 
-                    self.qualification, self.ppa, self.password, self.image_file)
+        return f"User('{self.full_name}', '{self.state_code}', '{self.callup_no}', '{self.gender}', '{self.marital_status}', '{self.phone}', '{self.email}', '{self.state_of_origin}', '{self.lga}', '{self.address}', '{self.institution}', '{self.course}', '{self.qualification}', '{self.ppa}', '{self.password}', '{self.image_file}')"
         
 class Post(db.Model):
     
@@ -43,4 +45,4 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
-        return "Post('{}', '{}')".format(self.title, self.date_posted)
+        return f"Post('{self.title}', '{self.date_posted}')"

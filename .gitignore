@@ -1,6 +1,6 @@
 .vscode/
 .idea/
-**/venv/
+**/nysc/
 **/__pycache__
 .coverage
 .eslintrc.json
