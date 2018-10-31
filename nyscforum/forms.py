@@ -39,7 +39,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError(f'{self.email} already exist, try a different email address.')
     
     def validate_phone(self, phone):
-        user = USer.query.filter_by(phone=phone.data).first()
+        user = User.query.filter_by(phone=phone.data).first()
         if user:
             raise ValidationError(f'{self.phone.data} already exist, try another phone number.')
 
