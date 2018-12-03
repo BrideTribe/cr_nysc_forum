@@ -1,0 +1,22 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+@EXPLICIT
+https://repo.anaconda.com/pkgs/main/win-64/vs2015_runtime-14.15.26706-h3a45250_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/vc-14.1-h0510ff6_4.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/python-3.7.1-h33f27b4_3.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/certifi-2018.10.15-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/click-7.0-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/itsdangerous-1.0.0-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/markupsafe-1.0-py37hfa6e2cd_1.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/sqlalchemy-1.2.12-py37he774522_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/werkzeug-0.14.1-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/wincertstore-0.2-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/wtforms-2.2.1-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/setuptools-40.4.3-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/jinja2-2.10-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/wheel-0.32.2-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/flask-1.0.2-py37_1.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/pip-10.0.1-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/flask-sqlalchemy-2.3.2-py37_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/win-64/flask-wtf-0.14.2-py37_1.tar.bz2
