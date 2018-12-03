@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -67,6 +68,7 @@ class UpdateAccountForm(FlaskForm):
     qualification = StringField('Qualification', validators=[DataRequired(), Length(min=3, max=10)])
     ppa = StringField('PPA', validators=[DataRequired(), Length(min=2, max=200)])
     
+    picture = FileField('Update profile picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 
     #Fields input validation
@@ -88,8 +90,4 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError(f'{self.email} already exist, try a different email address.')
         
-    def validate_phone(self, phone):
-        if phone.data != current_user:
-            user = User.query.filter_by(phone=phone.data).first()
-            if user:
-                raise ValidationError(f'{self.phone.data} already exist, try another phone number.')
+   
