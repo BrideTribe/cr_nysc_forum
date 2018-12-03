@@ -1,6 +1,9 @@
+import os #to capture picture extension
+import secrets  #this is for the picture function
+from PIL import Image
 from flask import render_template, url_for, flash, redirect,request
 from nyscforum import app, db, bcrypt
-from nyscforum.forms import RegistrationForm, LoginForm
+from nyscforum.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from nyscforum.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -78,7 +81,63 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route("/account")
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images', picture_fn)
+    
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+@app.route("/account", methods=['GET','POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account') 
+    form = UpdateAccountForm()
+
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.full_name = form.full_name.data
+        current_user.state_code = form.state_code.data 
+        current_user.callup_no = form.callup_no.data
+        current_user.gender = form.gender.data
+        current_user.marital_status = form.marital_status.data
+        current_user.phone = form.phone.data
+        current_user.email = form.email.data
+        current_user.state_of_origin = form.state_of_origin.data
+        current_user.lga = form.lga.data
+        current_user.address = form.address.data
+        current_user.institution = form.institution.data
+        current_user.course = form.course.data 
+        current_user.qualification = form.qualification.data
+        current_user.ppa = form.ppa.data
+
+        db.session.commit()
+        #Process complete message.
+        flash('Your account has been updated successfully!', 'success')
+
+        return redirect(url_for('account'))
+
+    elif request.method == 'GET':
+        form.full_name.data = current_user.full_name 
+        form.state_code.data =  current_user.state_code 
+        form.callup_no.data = current_user.callup_no 
+        form.gender.data = current_user.gender 
+        form.marital_status.data = current_user.marital_status 
+        form.phone.data = current_user.phone 
+        form.email.data = current_user.email 
+        form.state_of_origin.data = current_user.state_of_origin 
+        form.lga.data = current_user.lga 
+        form.address.data = current_user.address 
+        form.institution.data = current_user.institution
+        form.course.data =  current_user.course 
+        form.qualification.data = current_user.qualification 
+        form.ppa.data =current_user.ppa 
+    image_file = url_for('static', filename='images/'+ current_user.image_file)
+    return render_template('account.html', title='Account', image_file=image_file, form=form) 
