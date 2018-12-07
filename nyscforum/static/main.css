@@ -1,5 +1,6 @@
 body {
-    background: #fafafa;
+    background-image: url('nyscforum/static/images/nysc1.jpg');
+    background-blend-mode: darken;
     color: #333333;
     margin-top: 5rem;
   }
