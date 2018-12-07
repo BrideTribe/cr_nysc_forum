@@ -4,7 +4,7 @@
             <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="">
             <div class="media-body">
                 <div class="article-metadata"> 
-                    <a class="mr-2" href="#">{{ post.author.full_name }}</a>
+                    <a class="mr-2" href="{{ url_for('user_posts', full_name=post.author.full_name) }}">{{ post.author.full_name }}</a>
                     <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
                     {% if post.author == current_user %}
                         <div>
@@ -28,7 +28,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <h5>You want to delete post?</h5>
+                  <h5>You want to delete this post?</h5>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
